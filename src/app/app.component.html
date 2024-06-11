@@ -1,0 +1,73 @@
+<div class="main-container">
+    <div class="table-container">
+        <h2>Capteurs</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+                <th>Température</th>
+                <th>Humidité</th>
+                <th>Intervalle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let capteur of capteurs">
+                <td>{{ capteur.id }}</td>
+                <td>{{ capteur.longitude }}</td>
+                <td>{{ capteur.latitude }}</td>
+                <td>{{ capteur.temperature }}</td>
+                <td>{{ capteur.humidite }}</td>
+                <td>{{ capteur.intervalle }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container">
+        <h2>Relevés</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date du Relevé</th>
+                <th>Humidité</th>
+                <th>Température</th>
+                <th>ID Capteur</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let releve of releves">
+                <td>{{ releve.id }}</td>
+                <td>{{ releve.dateReleve }}</td>
+                <td>{{ releve.humidite }}</td>
+                <td>{{ releve.temperature }}</td>
+                <td>{{ releve.idCapteur }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container">
+        <h2>Actionneurs</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>État</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let actionneur of actionneurs">
+                <td>{{ actionneur.id }}</td>
+                <td>{{ actionneur.etat }}</td>
+                <td>{{ actionneur.longitude }}</td>
+                <td>{{ actionneur.latitude }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    background-color: #f0f0f0; /* Couleur de fond légère pour contraster avec le contenu */
+}
+
+.main-container {
+    width: 80%; /* Largeur fixée à 80 % de la fenêtre */
+    margin: 20px auto; /* Marge pour centrer le contenu et l'espacer du haut et du bas */
+    padding: 20px;
+    background-color: #ffffff; /* Couleur de fond pour le conteneur principal */
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1); /* Ombre portée pour ajouter de la profondeur */
+    border-radius: 8px; /* Bordures arrondies */
+}
+
+.table-container {
+    width: 100%; /* Largeur à 100 % du conteneur parent */
+    margin-top: 20px; /* Marge au-dessus de chaque tableau pour les séparer */
+}
+
+table {
+    width: 100%; /* Largeur à 100 % du conteneur de tableau */
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
