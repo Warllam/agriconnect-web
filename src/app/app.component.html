@@ -10,6 +10,8 @@
                 <th>Température</th>
                 <th>Humidité</th>
                 <th>Intervalle</th>
+                <th>Limite</th> <!-- Nouvelle colonne pour les limites -->
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -20,9 +22,29 @@
                 <td>{{ capteur.temperature }}</td>
                 <td>{{ capteur.humidite }}</td>
                 <td>{{ capteur.intervalle }}</td>
+                <td>{{ getLimiteDisplay(capteur.id) }}</td> <!-- Affichage dynamique des limites -->
+                <td>
+                    <button (click)="editCapteur(capteur)">Modifier</button>
+                    <button (click)="deleteCapteur(capteur.id)">Supprimer</button>
+                    <button (click)="manageLimite(capteur)">Gérer Limite</button> <!-- Bouton pour gérer les limites -->
+                </td>
             </tr>
             </tbody>
         </table>
+        <button (click)="addCapteur()">Ajouter Capteur</button>
+    </div>
+
+    <div *ngIf="isEditingLimite || isAddingLimite" class="modal">
+        <form (ngSubmit)="submitLimiteForm()">
+            <label>id Actionneur Temp: <input type="number" [(ngModel)]="currentLimite.idActionneurTemp" name="idActionneurTemp" /></label>
+            <label>id Actionneur Hum: <input type="number" [(ngModel)]="currentLimite.idActionneurHum" name="idActionneurHum" /></label>
+            <label>Température Limite: <input type="number" [(ngModel)]="currentLimite.limitTemp" name="limitTemp" /></label>
+            <label>Humidité Limite: <input type="number" [(ngModel)]="currentLimite.limitHum" name="limitHum" /></label>
+            <label>durée Actionneur Hum: <input type="number" [(ngModel)]="currentLimite.dureeActionneurHum" name="dureeActionneurHum" /></label>
+            <label>durée Actionneur Temp: <input type="number" [(ngModel)]="currentLimite.dureeActionneurTemp" name="dureeActionneurTemp" /></label>
+            <button type="submit">{{ isAddingLimite ? 'Ajouter' : 'Mettre à jour' }}</button>
+            <button type="button" (click)="cancelEditLimite()">Annuler</button>
+        </form>
     </div>
 
     <div class="table-container">
@@ -58,6 +80,7 @@
                 <th>État</th>
                 <th>Longitude</th>
                 <th>Latitude</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -66,8 +89,68 @@
                 <td>{{ actionneur.etat }}</td>
                 <td>{{ actionneur.longitude }}</td>
                 <td>{{ actionneur.latitude }}</td>
+                <td>
+                    <button (click)="triggerActionneur(actionneur)">Déclencher</button>
+                    <button (click)="editActionneur(actionneur)">Modifier</button>
+                    <button (click)="deleteActionneur(actionneur.id)">Supprimer</button>
+                    <button (click)="loadHistoriques(actionneur.id)">Voir Historiques</button> <!-- Ajouté -->
+                </td>
             </tr>
             </tbody>
         </table>
+        <button (click)="addActionneur()">Ajouter Actionneur</button>
+    </div>
+
+    <!-- Nouvelle section pour les historiques des actionneurs -->
+    <div *ngIf="historiques.length > 0" class="table-container">
+        <h2>Historiques de l'actionneur</h2>
+        <table >
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Actionneur</th>
+                <th>Date</th>
+                <th>Durée</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let historique of historiques">
+                <td>{{ historique.id }}</td>
+                <td>{{ historique.idActionneur }}</td>
+                <td>{{ historique.date }}</td>
+                <td>{{ historique.duree }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Nouvelle section pour les statistiques de l'utilisateur -->
+
+
+    <!-- Formulaires modals pour ajouter/modifier capteurs et actionneurs -->
+    <div *ngIf="isEditingCapteur || isAddingCapteur" class="modal">
+        <form (ngSubmit)="submitCapteurForm()">
+            <!-- Form fields for capteur properties -->
+            <label>ID: <input type="text" [(ngModel)]="currentCapteur.id" name="id" /></label>
+            <label>Longitude: <input type="text" [(ngModel)]="currentCapteur.longitude" name="longitude" /></label>
+            <label>Latitude: <input type="text" [(ngModel)]="currentCapteur.latitude" name="latitude" /></label>
+            <label>Température: <input type="text" [(ngModel)]="currentCapteur.temperature" name="temperature" /></label>
+            <label>Humidité: <input type="text" [(ngModel)]="currentCapteur.humidite" name="humidite" /></label>
+            <label>Intervalle: <input type="text" [(ngModel)]="currentCapteur.intervalle" name="intervalle" /></label>
+            <button type="submit">Enregistrer</button>
+            <button type="button" (click)="cancelEditCapteur()">Annuler</button>
+        </form>
+    </div>
+
+    <div *ngIf="isEditingActionneur || isAddingActionneur" class="modal">
+        <form (ngSubmit)="submitActionneurForm()">
+            <!-- Form fields for actionneur properties -->
+            <label>ID: <input type="text" [(ngModel)]="currentActionneur.id" name="id" /></label>
+            <label>État: <input type="text" [(ngModel)]="currentActionneur.etat" name="etat" /></label>
+            <label>Longitude: <input type="text" [(ngModel)]="currentActionneur.longitude" name="longitude" /></label>
+            <label>Latitude: <input type="text" [(ngModel)]="currentActionneur.latitude" name="latitude" /></label>
+            <button type="submit">Enregistrer</button>
+            <button type="button" (click)="cancelEditActionneur()">Annuler</button>
+        </form>
     </div>
 </div>

@@ -16,6 +16,8 @@ import { TooltipPosition, MatTooltipModule } from "@angular/material/tooltip";
 import {AppComponent} from "./app.component";
 import {AgGridAngular} from "ag-grid-angular";
 import { HttpClientModule } from "@angular/common/http";
+import {LoginComponent} from "./component/login/login.component";
+import {DashboardAgriculteurComponent} from "./component/dashboard-agriculteur/dashboard-agriculteur.component";
 
 
 const appRoutes: Routes = [
@@ -25,6 +27,8 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
+        LoginComponent,
+        DashboardAgriculteurComponent,
     ],
     imports: [
         BrowserModule,

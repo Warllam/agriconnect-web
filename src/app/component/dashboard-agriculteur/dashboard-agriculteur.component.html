@@ -1,0 +1,32 @@
+<div class="dashboard">
+    <h2>Capteurs</h2>
+    <div *ngFor="let capteur of capteurs">
+        <p>{{ capteur.id }}: {{ capteur.temperature }}</p>
+        <button (click)="setEditCapteur(capteur)">Edit</button>
+    </div>
+    <div *ngIf="editCapteur">
+        <form (ngSubmit)="updateCapteur()">
+            <!-- Add fields for editing capteur -->
+            <input type="number" [(ngModel)]="editCapteur.longitude" name="longitude" placeholder="Longitude" required>
+            <input type="number" [(ngModel)]="editCapteur.latitude" name="latitude" placeholder="Latitude" required>
+            <input type="number" [(ngModel)]="editCapteur.temperature" name="temperature" placeholder="Temperature" required>
+            <input type="number" [(ngModel)]="editCapteur.humidite" name="humidite" placeholder="Humidité" required>
+            <button type="submit">Update Capteur</button>
+        </form>
+    </div>
+
+    <h2>Actionneurs</h2>
+    <div *ngFor="let actionneur of actionneurs">
+        <p>{{ actionneur.id }}: {{ actionneur.etat }}</p>
+        <button (click)="setEditActionneur(actionneur)">Edit</button>
+        <button (click)="triggerActionneur(actionneur.id)">Trigger</button>
+    </div>
+    <div *ngIf="editActionneur">
+        <form (ngSubmit)="updateActionneur()">
+            <!-- Add fields for editing actionneur -->
+            <input type="number" [(ngModel)]="editActionneur.longitude" name="longitude" placeholder="Longitude" required>
+            <input type="number" [(ngModel)]="editActionneur.latitude" name="latitude" placeholder="Latitude" required>
+            <button type="submit">Update Actionneur</button>
+        </form>
+    </div>
+</div>
